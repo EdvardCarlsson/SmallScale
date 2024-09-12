@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producer Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        
+        
+        /* -- Images ------- */
+        .image-gallery img {
+            max-width: 200px;
+            border-radius: 8px;
+        }
+
+        /*------ The Modal (background)  - Images -----*/
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            padding-top: 50px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.9); /* Black background with opacity */
+        }
+
+        /* Modal Content (Image) */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 8px;
+        }
+
+        /* Caption of Modal Image */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Add Animation - Zoom in the Modal */
+        .modal-content {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @keyframes zoom {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Add arrows for navigation */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 10px;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* Position the "previous button" to the left */
+        .prev {
+            left: 10px;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* Hover effects for the arrows */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        
+        /* -- Info ------- */
+        .description-services-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .description {
+            flex: 3; /* Make the description side larger */
+            padding: 10px;
+        }
+
+        .services {
+            flex: 1; /* Make the services side smaller */
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left; /* Align text to the right */
+        }
+
+        /* Styling for lists with icons */
+        .services ul, .products ul {
+            list-style: none; /* Remove default list bullets */
+            padding: 0;
+        }
+
+        .services li, .products li {
+            display: flex;
+            justify-content: flex-start; /* Align list items to the right */
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        .services li i, .products li i {
+            margin-left: 10px; /* Space between text and icon */
+            color: #ff5a5f; /* Customize icon color */
+        }
+
+        .services h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+            text-align: left; /* Align headings to the right */
+        }
+
+        /* Optional: Improve UI for mobile */
+        @media (max-width: 768px) {
+            .description-services-container {
+                flex-direction: column;
+            }
+
+            .services, .description {
+                margin-bottom: 20px;
+                text-align: left; /* Revert text alignment to left on smaller screens */
+            }
+        }
+
+        /* -- Products ------- */
+        .products-container {
+            margin-top: 40px;
+        }
+
+        .product-cards {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .product-card {
+            width: 250px;
+            height: 350px;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .product-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-front {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-front img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-front h3 {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .card-back {
+            background-color: #f9f9f9;
+            transform: rotateY(180deg);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        
+        /* --------Reviews --------------*/
+        .reviews-section {
+            margin-top: 50px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #e74c3c;
+        }
+
+        /* Styling for the container that holds both contact info and opening hours */
+        .contact-and-hours {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Style the individual boxes */
+        .contact-info, .opening-hours {
+            flex: 1;
+            padding: 15px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for the opening hours table */
+        .opening-hours table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .opening-hours table tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .opening-hours table td {
+            padding: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* On smaller screens, stack the contact info and opening hours vertically */
+        @media (max-width: 768px) {
+            .contact-and-hours {
+                flex-direction: column;
+            }
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+   
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-item center-item">SmallScale.se</a>
+        <div class="nav-links">
+            <a href="wine.html" class="nav-item">Wine</a>
+            <a href="beer.html" class="nav-item">Beer</a>
+            <a href="cider.html" class="nav-item">Cider</a>
+            <a href="spirits.html" class="nav-item">Spirits</a>
+            <a href="news.html" class="nav-item">News</a>
+            <a href="about.html" class="nav-item right-item">About Us</a>
+        </div>
+    </nav>
+
+
+    <header class="page-header">
+        <h1 id="producer-name">Producer Name</h1>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <h2>About <span id="producer-name-title"></span></h2>
+            
+            <div class="image-gallery" id="image-gallery">
+                <!-- Images will be dynamically added here -->
+            </div>
+            <!-- The Modal for Larger Image View -->
+            <div id="imageModal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="modal-image">
+                <div id="caption"></div>
+
+                <!-- Navigation Arrows -->
+                <a class="prev" id="prev">&#10094;</a>
+                <a class="next" id="next">&#10095;</a>
+            </div>
+
+
+            <div class="description-services-container">
+                <!-- Description (Left Side) -->
+                <div class="description" id="producer-description">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+
+                <!-- Services (Right Side) -->
+                <div class="services">
+                    <h2>Products</h2>
+                    <ul id="products-list"></ul>
+                    
+                    <h2>Services Offered</h2>
+                    <ul id="services-list"></ul>
+                    
+                </div>
+            </div>
+
+            <h2>Contact Information & Opening Hours</h2>
+            <div class="contact-and-hours">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <p><strong>Address:</strong> 
+                        <a href="#" target="_blank" id="producer-address"></a>
+                    </p>
+                    <p><strong>Website:</strong> 
+                        <a href="#" target="_blank" id="producer-website"></a>
+                    </p>
+                    <p><strong>Phone Number:</strong> 
+                        <span id="producer-phone"></span>
+                    </p>
+                </div>
+
+                <!-- Opening Hours (Table Format) -->
+                <div class="opening-hours">
+                    <table id="opening-hours-table">
+                        <!-- Opening hours will be dynamically added here -->
+                    </table>
+                </div>
+            </div>
+
+
+        <h2>Find Us on Google Maps</h2>
+        <div class="map-container">
+            <iframe id="maps" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div class="products-container">
+            <h2>Our Products</h2>
+            <div id="product-cards" class="product-cards">
+                <!-- Product cards will be dynamically added here -->
+            </div>
+        </div>
+        
+        <!-- Add Review Form -->
+        <section class="reviews-section">
+            <h2>Leave a Review</h2>
+            <form id="review-form" action="submit_review.php" method="POST">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="review">Review:</label>
+                    <textarea id="review" name="review" rows="5" required></textarea>
+                </div>
+                <button type="submit">Submit Review</button>
+            </form>
+        </section>
+
+
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 SmallScale.se | All rights reserved</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+
+    <!-- External JavaScript file with producer data -->
+    <script src="JavaScript/producers_data.js"></script>
+    <script src="JavaScript/products_data.js"></script>
+
+     <!-- Retreiving data -->
+    <script>
+        // Extract the producer's name from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const producerName = urlParams.get('name');
+
+        // Find the producer from producers_data.js
+        const producer = producersData[producerName];
+
+        // Find the products for the producer from products_data.js
+        const products = productsData[producerName];
+
+
+        const productIcons = {
+            "Wine": "<i class='fas fa-wine-bottle'></i>",
+            "Beer": "<i class='fas fa-beer'></i>",
+            "Spirits": "<i class='fas fa-glass-martini-alt'></i>"
+        };
+
+        const serviceIcons = {
+            "Restaurant": "<i class='fas fa-utensils'></i>",
+            "Tasting": "<i class='fas fa-wine-glass'></i>",
+            "Tour": "<i class='fas fa-walking'></i>"
+        };
+
+
+        if (producer) {
+            // Populate producer data dynamically
+            document.getElementById('producer-name').textContent = producer.name;
+            document.getElementById('producer-name-title').textContent = producer.name;
+            document.getElementById('producer-description').textContent = producer.description;
+
+            // Populate the products list
+            const productsList = document.getElementById('products-list');
+            producer.products.forEach(product => {
+                const li = document.createElement('li');
+                li.innerHTML = `${productIcons[product] || ''} ${product}`; // Add icon if available
+                productsList.appendChild(li);
+            });
+
+
+            // Populate the services list
+            const servicesList = document.getElementById('services-list');
+            producer.services.forEach(service => {
+                const li = document.createElement('li');
+                li.innerHTML = `${serviceIcons[service] || ''} ${service}`; // Add icon if available
+                servicesList.appendChild(li);
+            });
+
+            // Populate contact info
+            document.getElementById('producer-address').textContent = producer.address;
+            document.getElementById('producer-address').href = `https://www.google.com/maps?q=${encodeURIComponent(producer.address)}`;
+            document.getElementById('producer-phone').textContent = producer.phone;
+            document.getElementById('producer-website').textContent = producer.website;
+            document.getElementById('producer-website').href = producer.website;
+
+            // Populate Google Maps iframe
+            document.getElementById('maps').src = producer.maps;
+            
+            // Populate the opening hours in a table format
+            const openingHoursElement = document.getElementById('opening-hours-table');
+            if (producer.openingHours) {
+                for (const [day, hours] of Object.entries(producer.openingHours)) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><strong>${day}</strong></td>
+                        <td>${hours}</td>
+                    `;
+                    openingHoursElement.appendChild(row);
+                }
+            }
+        
+        
+
+        } else {
+            document.getElementById('producer-name').textContent = 'Producer not found';
+        }
+
+        if (products && products.length > 0) {
+            const productCardsContainer = document.getElementById('product-cards');
+
+            // Loop through products and generate the product cards
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.classList.add('product-card');
+
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <!-- Front of the card -->
+                        <div class="card-front">
+                            <img src="${product.image}" alt="${product.name}">
+                            <h3>${product.name}</h3>
+                            <p>${product.shortDescription}</p>
+                        </div>
+                        <!-- Back of the card -->
+                        <div class="card-back">
+                            <h3>${product.name}</h3>
+                            <p>${product.detailedDescription}</p>
+                        </div>
+                    </div>
+                `;
+
+                productCardsContainer.appendChild(card);
+            });
+        } else {
+            const productCardsContainer = document.getElementById('product-cards');
+            productCardsContainer.innerHTML = "<p>No products available for this producer.</p>";
+        }
+    </script>
+
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modal-image');
+        const captionText = document.getElementById('caption');
+        const closeModalBtn = document.getElementsByClassName('close')[0];
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+
+        let currentImageIndex = 0; // Track the current image
+        let imageSources = []; // Array to hold the image sources
+
+        // Get the image gallery container and images
+        const imageGallery = document.getElementById('image-gallery');
+
+        // Populate the image gallery and store image sources
+        producer.images.forEach((imageSrc, index) => {
+            const img = document.createElement('img');
+            img.src = imageSrc; // Set the image source
+            img.alt = producer.name; // Add alt text for accessibility
+            img.style.cursor = 'pointer'; // Change cursor to pointer on hover
+            imageGallery.appendChild(img); // Add the image to the gallery
+
+            // Add event listener to each image to open the modal on click
+            img.addEventListener('click', () => {
+                currentImageIndex = index; // Update the current image index
+                openModal(imageSrc); // Open the modal with the clicked image
+            });
+
+            // Store the image source in an array
+            imageSources.push(imageSrc);
+        });
+
+        // Function to open the modal and display the clicked image
+        function openModal(imageSrc) {
+            modal.style.display = 'block';
+            modalImg.src = imageSrc; // Set the image src to the clicked image
+            captionText.textContent = producer.name; // Use alt text as caption
+        }
+
+        // Close the modal when the user clicks on the close button
+        closeModalBtn.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        // Close the modal if the user clicks outside the image
+        modal.onclick = function(event) {
+            if (event.target !== modalImg && event.target !== nextBtn && event.target !== prevBtn) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Navigate to the previous image
+        prevBtn.onclick = function() {
+            currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
+            modalImg.src = imageSources[currentImageIndex];
+        };
+
+        // Navigate to the next image
+        nextBtn.onclick = function() {
+            currentImageIndex = (currentImageIndex + 1) % imageSources.length;
+            modalImg.src = imageSources[currentImageIndex];
+        };
+    </script>
+
+
+</body>
+</html>

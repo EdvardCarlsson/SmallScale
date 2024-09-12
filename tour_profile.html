@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Profile</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-item center-item">SmallScale.se</a>
+        <div class="nav-links">
+            <a href="wine.html" class="nav-item">Wine</a>
+            <a href="beer.html" class="nav-item">Beer</a>
+            <a href="cider.html" class="nav-item">Cider</a>
+            <a href="spirits.html" class="nav-item">Spirits</a>
+            <a href="news.html" class="nav-item">News</a>
+            <a href="about.html" class="nav-item right-item">About Us</a>
+        </div>
+    </nav>
+
+    <!-- Tour Profile -->
+    <main>
+        <section id="tour-profile">
+            <!-- Content will be dynamically loaded here -->
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 SmallScale.se | All rights reserved</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+
+    <!-- Scripts    -->
+    <script src="JavaScript/tours_data.js"></script>
+    <script>
+        // Function to retrieve URL parameters
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const tourId = getUrlParam('id');
+        const tourProfileSection = document.getElementById('tour-profile');
+
+        const selectedTour = toursData.find(tour => tour.id == tourId);
+
+        if (selectedTour) {
+            tourProfileSection.innerHTML = `
+                <h1>${selectedTour.title}</h1>
+                <img src="${selectedTour.image}" alt="${selectedTour.title}" class="category-image">
+                <h2>Region: ${selectedTour.region}</h2>
+                <h3>Organizer: ${selectedTour.organizer}</h3>
+                <p>${selectedTour.description}</p>
+            `;
+        } else {
+            tourProfileSection.innerHTML = `<p>Tour not found.</p>`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <body id="skane-page">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producers in Skåne</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/search_pages.css">
+
+    <!-- In case of any specific style changes-->
+    <style>
+    /* Header styling with background image */
+    .page-header {
+        background-image: url('images/wine.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+
+</head>
+<body>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-item center-item">SmallScale.se</a>
+        <div class="nav-links">
+            <a href="wine.html" class="nav-item">Wine</a>
+            <a href="beer.html" class="nav-item">Beer</a>
+            <a href="cider.html" class="nav-item">Cider</a>
+            <a href="spirits.html" class="nav-item">Spirits</a>
+            <a href="news.html" class="nav-item">News</a>
+            <a href="about.html" class="nav-item right-item">About Us</a>
+        </div>
+    </nav>
+    
+    <!-- Page Header with main title -->
+    <header class="page-header">
+        <h1>Small scale Producers in Skåne</h1>
+    </header>
+
+    <main>
+        <!-- Left side: Map -->
+        <div id="map"></div>
+
+        <!-- Right side: Filters -->
+        <div id="right-content">
+            <h2>Filters and Info</h2>
+            <div id="filters">
+                <h3>Filter by Service:</h3>
+                <label>
+                    <input type="checkbox" id="restaurant-filter"> Restaurant
+                </label><br>
+                <label>
+                    <input type="checkbox" id="tasting-filter"> Tasting
+                </label><br>
+                <label>
+                    <input type="checkbox" id="tour-filter"> Guided Tour
+                </label><br>
+
+                <h3>Filter by Product Type:</h3>
+                <label>
+                    <input type="checkbox" id="wine-filter"> Wine
+                </label><br>
+                <label>
+                    <input type="checkbox" id="beer-filter"> Beer
+                </label><br>
+                <label>
+                    <input type="checkbox" id="spirits-filter"> Spirits
+                </label><br>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 SmallScale.se | All rights reserved</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+
+    <!-- External JavaScript file -->
+    <script src="JavaScript/map.js"></script>
+    
+
+    <!-- Google Maps API script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqk--uvvn975ACuIl5YQeVMvel6YWoo5Q&callback=initMap&libraries=marker" async defer></script>
+</body>
+</html>

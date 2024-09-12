@@ -1,0 +1,20 @@
+<section>
+    <h2>Manage Products</h2>
+    <form id="productForm" action="/add-product" method="POST">
+        <label for="productName">Product Name</label>
+        <input type="text" id="productName" name="productName" required>
+
+        <label for="productImage">Product Image URL</label>
+        <input type="url" id="productImage" name="productImage" required>
+
+        <button type="submit">Add Product</button>
+    </form>
+    
+    <h3>Existing Products</h3>
+    <ul id="productList">
+        <!-- List of current products with edit/delete buttons -->
+        <li>
+            Red Wine <button>Edit</button> <button>Delete</button>
+        </li>
+    </ul>
+</section>

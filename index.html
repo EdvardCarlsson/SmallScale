@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Categories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #333;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar .nav-item {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1rem;
+        }
+
+        .navbar .nav-item:hover {
+            text-decoration: underline;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Header Styling */
+        .page-header {
+            background-image: url('images/wine.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        /* Category Section */
+        .category-section {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .category-buttons {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .category-buttons a {
+            text-align: center;
+            text-decoration: none;
+            margin: 15px;
+            width: 240px;
+            display: block;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-buttons a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-buttons img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .category-buttons span {
+            display: block;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .footer .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .footer .social-links a:hover {
+            color: #bbb;
+        }
+
+        /* Tour Card Styles */
+        .tour-card {
+            text-align: center;
+            text-decoration: none;
+            margin: 15px;
+            width: 240px;
+            display: block;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tour-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .tour-info {
+            padding: 15px;
+        }
+
+        .tour-info h3 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .tour-info p {
+            font-size: 0.9rem;
+            color: #777;
+            margin: 5px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-item {
+                margin: 5px 0;
+            }
+
+            .page-header {
+                height: 200px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .category-buttons a {
+                width: 180px;
+            }
+
+            .category-buttons img {
+                height: 140px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                flex-direction: column;
+                padding: 5px;
+            }
+
+            .nav-item {
+                font-size: 0.9rem;
+                margin: 5px 0;
+            }
+
+            .category-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-buttons a {
+                width: 160px;
+            }
+
+            .category-buttons img {
+                height: 120px;
+            }
+
+            .footer p {
+                font-size: 0.8rem;
+            }
+
+            .tour-card {
+                width: 160px;
+            }
+
+            .tour-card img {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-item center-item">SmallScale.se</a>
+        <div class="nav-links">
+            <a href="wine.html" class="nav-item">Wine</a>
+            <a href="beer.html" class="nav-item">Beer</a>
+            <a href="cider.html" class="nav-item">Cider</a>
+            <a href="spirits.html" class="nav-item">Spirits</a>
+            <a href="news.html" class="nav-item">News</a>
+            <a href="about.html" class="nav-item right-item">About Us</a>
+        </div>
+    </nav>
+
+<!-- Page Header with main title -->
+<header class="page-header">
+    <h1>What are you looking for today?</h1>
+</header>
+  
+
+    <main>
+        <!-- Search by product type -->
+        <section class="category-section">
+            <h2>Product Line</h2>
+            <div class="category-buttons">
+                <a href="wine.html">
+                    <img src="images/wine.jpg" alt="Wine" class="category-image">
+                    <span>Wine</span>
+                </a>
+                <a href="beer.html">
+                    <img src="images/beer.jpg" alt="Beer" class="category-image">
+                    <span>Beer</span>
+                </a>
+                <a href="beer.html">
+                    <img src="images/beer.jpg" alt="Cider" class="category-image">
+                    <span>Cider</span>
+                </a>
+                <a href="spirits.html">
+                    <img src="images/spirits.jpg" alt="Spirits" class="category-image">
+                    <span>Spirits</span>
+                </a>
+                <a href="all.html">
+                    <img src="images/all.jpg" alt="All" class="category-image">
+                    <span>All</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Geography Section -->
+        <section class="category-section">
+            <h2>Search by geography</h2>
+            <div class="category-buttons">
+                <a href="skane.html">
+                    <img src="images/skane.jpg" alt="Skåne" class="category-image">
+                    <span>Skåne</span>
+                </a>
+                <a href="goteborg.html">
+                    <img src="images/goteborg.jpg" alt="Göteborg" class="category-image">
+                    <span>Göteborg</span>
+                </a>
+                <a href="stockholm.html">
+                    <img src="images/stockholm.jpg" alt="Stockholm" class="category-image">
+                    <span>Stockholm</span>
+                </a>
+                <a href="hela-landet.html">
+                    <img src="images/hela-landet.jpg" alt="Hela Landet" class="category-image">
+                    <span>Country wide</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Guided Tours Section -->
+        <section class="category-section">
+            <h2>Guided Tours</h2>
+            <div id="guided-tours" class="category-buttons">
+                <!-- Tours will be dynamically loaded here -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 SmallScale.se | All rights reserved</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+    
+    <!-- Scripts  ------->
+    <script src="JavaScript/tours_data.js"></script>
+    <script>
+        // Load tours dynamically from tours_data.js
+        const toursContainer = document.getElementById('guided-tours');
+        
+        toursData.forEach(tour => {
+            const tourCard = document.createElement('a');
+            tourCard.href = `tour_profile.html?id=${tour.id}`;
+            tourCard.className = 'tour-card';
+
+            tourCard.innerHTML = `
+                <img src="${tour.image}" alt="${tour.title}" class="category-image">
+                <div class="tour-info">
+                    <h3>${tour.title}</h3>
+                    <p>${tour.region}</p>
+                    <p>Organizer: ${tour.organizer}</p>
+                    <p>${tour.description}</p>
+                </div>
+            `;
+            
+            toursContainer.appendChild(tourCard);
+        });
+    </script>
+
+</body>
+</html>

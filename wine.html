@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine Producers in Sweden</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/search_pages.css">
+    
+    <!-- In case of any specific style changes-->
+    <style>
+        /* Header styling with background image */
+        .page-header {
+        background-image: url('images/wine.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+
+</head>
+<body id="wine-page">
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-item center-item">SmallScale.se</a>
+        <div class="nav-links">
+            <a href="wine.html" class="nav-item">Wine</a>
+            <a href="beer.html" class="nav-item">Beer</a>
+            <a href="cider.html" class="nav-item">Cider</a>
+            <a href="spirits.html" class="nav-item">Spirits</a>
+            <a href="news.html" class="nav-item">News</a>
+            <a href="about.html" class="nav-item right-item">About Us</a>
+        </div>
+    </nav>
+    
+    <!-- Page Header with main title and background image -->
+    <header class="page-header">
+        <h1>Small scale Wine Producers in Sweden</h1>
+    </header>
+
+    <main>
+
+        <!-- Short description text above the map -->
+        <div class="description-container">
+            <p>
+                Sweden's wine industry is growing, with a focus on sustainability and quality. From the southern regions of Skåne to the vineyards spread across the country, Swedish wine producers are making a mark with their unique blends, offering wine lovers an exquisite experience. Explore the map below to discover the top producers.
+            </p>
+        </div>
+
+        <!-- Map and filter side by side -->
+        <div class="map-filter-container">
+            <!-- Left side: Map -->
+            <div id="map" aria-label="Map displaying wine producers in Sweden"></div>
+
+            <div id="right-content">
+                <h2>Filters</h2>
+
+                <div id="filters">
+                    <div class="filter-section open"> <!-- Initially open -->
+                        <h3>Filter by Service</h3>
+                        <div class="filter-content">
+                            <label for="restaurant-filter">
+                                <input type="checkbox" id="restaurant-filter">
+                                <i class="fas fa-utensils"></i> Restaurant
+                            </label><br>
+                            <label for="tasting-filter">
+                                <input type="checkbox" id="tasting-filter">
+                                <i class="fas fa-wine-glass"></i> Tasting
+                            </label><br>
+                            <label for="tour-filter">
+                                <input type="checkbox" id="tour-filter">
+                                <i class="fas fa-walking"></i> Guided Tour
+                            </label><br>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section open"> <!-- Initially open -->
+                        <h3>Filter by Product Type</h3>
+                        <div class="filter-content">
+                            <label for="wine-filter">
+                                <input type="checkbox" id="wine-filter">
+                                <i class="fas fa-wine-bottle"></i> Wine
+                            </label><br>
+                            <label for="beer-filter">
+                                <input type="checkbox" id="beer-filter">
+                                <i class="fas fa-beer"></i> Beer
+                            </label><br>
+                            <label for="cider-filter"></label>
+                                <input type="checkbox" id="cider-filter">
+                                <i class="fas fa-beer"></i> Cider
+                            </label><br>
+                            <label for="spirits-filter">
+                                <input type="checkbox" id="spirits-filter">
+                                <i class="fas fa-glass-martini-alt"></i> Spirits
+                            </label><br>
+                        </div>
+                    </div>
+                    
+
+
+                <!-- Reset Filters Button -->
+                <button id="reset-filters">Reset Filters</button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 SmallScale.se | All rights reserved</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+    
+
+    <!-- Lazy load for large images -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqk--uvvn975ACuIl5YQeVMvel6YWoo5Q&callback=initMap&libraries=marker" async defer></script>
+    <script src="JavaScript/producers_data.js"></script>
+    <script src="JavaScript/map.js"></script>
+    
+    <!-- For closing filters-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterSections = document.querySelectorAll('.filter-section h3');
+            filterSections.forEach(section => {
+                section.addEventListener('click', function () {
+                    const parent = section.parentElement;
+                    parent.classList.toggle('open');
+                });
+            });
+        });
+    </script> 
+   
+    
+</body>
+</html>
